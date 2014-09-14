@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en" ng-app="wReader">
+<head>
+  <meta charset="utf-8">
+<script>
+      document.write('<base href="' + document.location + '" />');
+    </script>
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/i/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>wReader</title>
+  <meta name="description" content="">
+
+  <!-- Mobile viewport optimized: h5bp.com/viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build.
+       Modernizr enables HTML5 elements & feature detects for optimal performance.
+       Create your own custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="js/libs/modernizr-2.5.3.min.js"></script>
+
+  <script src="js/libs/angular-1.0.0rc8/angular-1.0.0rc8.min.js"></script>
+
+<!--   <base target="_blank">  --><!-- This amazingness opens all links in a new tab. -->
+</head>
+<body ng-controller="AppController" class="ng-cloak" w-keydown w-space="handleSpace()"
+      w-down="items.next()" w-up="items.prev()" w-read="toggleRead()" w-star="toggleStar()" >
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+
+  <header>
+
+  <ul id="nav" ng-controller="NavBarController">
+    <li class="current"><a ng-click="showAll()" href="#" onclick="setVisibility('summaries', 'block');";><i class="icon-last-articles top-big"/></i><p>ARTICLES</p></a></li>
+    <li><a ng-click="showAll()" href="poesis.html"><i class="icon-poesis-content top-big"/></i><p>POIESIS</p></a></li>
+    <li> <a class="star top-big" ng-click="showStarred()" onclick="setVisibility('summaries', 'block');";><i class="icon-favorite-full top-big"/></i><p class="favori">FAVORI</p></a></li>
+    <li id="cat">
+          <a href="#" id="toggle-cat-list" title="Cliquer pour dérouler les catégories"><i class="icon-settings top-big"/></i><p class="arrow-after">REGLAGES</p></a>
+            <ul id="reading-settings">
+              <form class="navbar-search pull-left" id="navSearch">
+                <input type="search" ng-model="$parent.search" class="search-query" placeholder="Search">
+              </form>
+              <li class="itemCount"><a ng-click="showAll()"><i class="icon-last-articles small-settings"/></i><p>{{items.allCount()}} Articles</p></a></li>
+              <li class="itemCount"><a ng-click="showStarred()"><i class="icon-favorite-full small-settings"/></i><p>{{items.starredCount()}} Favoris</p></a></li>
+              <li class="itemCount"><a ng-click="showUnread()"><i class="icon-read-empty small-settings"/></i><p>{{items.unreadCount()}} Non-lus</p></a></li>
+              <li class="itemCount"><a ng-click="showRead()"><i class="icon-read-full small-settings"/></i><p>{{items.readCount()}} Lu</p></a></li>
+              <!--  <button ng-click="items.markAllRead()" class="btn" title="Mark all as read" alt="Mark all as read"><i class="icon-ok"></i></button> -->
+              <li><i class="icon-reset small-settings"/></i><a ng-click="refresh()" title="Refresh all feeds" alt="Refresh all feeds"><i class="icon-refresh icon-white"></i></a></li>
+              
+              
+          </ul>
+      </li>
+    </ul>
+  </header>
+
+
+  <section class="mainContent">
+    <section class="summaries" id="summaries">
+      <article ng-repeat="item in items.filtered | filter: search | orderBy: '-pub_date'" id="{{item.item_id}}" ng-class="{read: item.read, active: item.selected}" class="well summary" ng-click="items.selectItem($index)" onclick="setVisibility('summaries', 'none');";>
+        </div>
+        <div><img ng-show="items.featured_image.url" ng-src="{{items.featured_image.url}}"/></div>
+        <h3 class="pub-title">{{item.title}}</h3>
+
+            <div class="details" >
+          <div class="pub-name-summary">
+           {{item.category}}
+          </div>
+          <div class="pub-date-summary">
+            {{item.pub_date | formattedDate}}
+          </div>
+          </div>
+      </article>
+    </section>
+
+
+
+    <section class="entries content-post" id="post">
+      
+         <div class="intro-excerp">
+          <h2 class="header">{{items.selected.title}}</h1>
+          <div class="short_desc" ng-bind-html-unsafe="item.short_desc"></div>
+
+          <span class="author">{{items.selected.pub_author}}</span> - <span class="pub-name">{{items.selected.pub_name}}</span>
+          </div>
+       
+       <article class="post">     
+       <div class="entry entry-meta" ng-class="{read: items.selected.read, active: items.selected.selected}" ng-hide="!items.selected">
+          <span class="pub-date">
+            {{items.selected.pub_date | formattedDate}} 
+          </span>
+             <span class="actions">
+              <input type="checkbox" class="read" ng-model="items.selected.read"><p>marquer comme lu</p>
+              </span>
+               <span class="actions">
+             <input type="checkbox" class="star" ng-model="items.selected.starred"><p>marquer comme favori</p>
+                      </span>
+          <div><img ng-show="items.selected.featured_image.url" ng-src="{{items.selected.featured_image.url}}"/></div>
+      </div>
+
+       
+         <div class="entry-content">
+          <p class="post-content" ng-bind-html-unsafe="items.selected.content"></p>
+        </div>
+      </article>
+      <div class="nothingSelected" ng-show="!items.filtered.length || !items.selected">
+        <p>Nothing selected.</p>
+      </div>
+
+    </section>
+  </section>
+
+  <footer>
+
+  </footer>
+</script>
+    <script src="js/libs/jquery-1.7.1.min.js"></script>
+  <!--<script src="js/plugins.js"></script>-->
+  <script src="js/libs/lawnchair-0.6.1.min.js"></script>
+  <script src="js/libs/lawnchair-adapter-indexed-db-0.6.1.js"></script>
+  <script src="js/libs/lawnchair-adapter-webkit-sqlite-0.6.1.js"></script>
+  <script src="js/libs/lawnchair-pagination-0.6.1.js"></script>
+  <script src="js/libs/moment-1.4.0.min.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/directives.js"></script>
+  <script src="js/ngRoute.js"></script>
+  <script src="js/ngAnimate.js"></script>
+  <script src="js/app.js"></script>
+ 
+
+<script>
+    jQuery(document).ready(function() {
+      var filter_list_container = $('#cat');
+      // On masque la liste des catégories
+      jQuery("#reading-settings").hide();
+      // Comportement lors du clic sur "Catégories"
+      jQuery("#toggle-cat-list").on("click", function(e) {
+          e.preventDefault();
+          if (jQuery("#reading-settings").css( "display" ) == "none") {
+              jQuery("#reading-settings").slideDown(600);
+              jQuery("#toggle-cat-list").attr("title", "Cliquer pour fermer la liste des catégories");
+              filter_list_container.toggleClass('is-open');
+          }
+          else {
+              jQuery("#reading-settings").slideUp(600);
+              jQuery("#toggle-cat-list").attr("title", "Cliquer pour dérouler la liste des catégories");
+              filter_list_container.removeClass('is-open'); 
+          }
+      })
+  })
+    $(document).mouseup(function (e)
+{
+    var container = $("#reading-settings");
+
+    if (!container.is(e.target) // if the target of the click isn't the container...
+        && container.has(e.target).length === 0) // ... nor a descendant of the container
+    {
+        container.hide();
+    }
+});
+  </script>
+  <script>
+  $(".itemCount").click(function(){
+      $("#reading-settings").hide(10);
+   
+});
+  </script>
+<script language="JavaScript">
+function setVisibility(id, visibility) {
+document.getElementById(id).style.display = visibility;
+}
+</script>
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+
+  <!--<script>
+    var _gaq=[['_setAccount','UA-29459980-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>-->
+
+
+
+</body>
+</html>

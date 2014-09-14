@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My HTML File</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/poesis/reset.css"> 
+  <link rel="stylesheet" href="css/poesis/css-poesis.css">
+ 
+  </head>
+<body ng-app="poesispart">
+<script>$('html, body').animate({ scrollTop: 0 }, 'fast');</script>
+
+ 
+
+
+
+
+	<!-- MAIN CONTENT AND INJECTED VIEWS -->
+		<div id="main">
+		
+			<div class="page {{ pageClass }}"  ng-view></div>
+			<!-- angular templating -->
+			<!-- this is where content will be injected -->
+
+		</div>
+
+	
+
+<!-- <script src="cordova.js"></script> -->
+<!-- <script src="js/poesis/adapters/memory-adapter.js"></script> -->
+<script src="js/poesis/jquery.min.js"></script>
+<!-- <script src="lib-poesis/fastclick.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-animate.js"></script>
+<script src="js/poesis/app.js"></script>
+
+
+<script>
+    jQuery(document).ready(function() {
+      var filter_list_container = $('#cat');
+      // On masque la liste des catégories
+      jQuery("#reading-settings").hide();
+      // Comportement lors du clic sur "Catégories"
+      jQuery("#toggle-cat-list").on("click", function(e) {
+          e.preventDefault();
+          if (jQuery("#reading-settings").css( "display" ) == "none") {
+              jQuery("#reading-settings").slideDown(600);
+              jQuery("#toggle-cat-list").attr("title", "Cliquer pour fermer la liste des catégories");
+              filter_list_container.toggleClass('is-open');
+          }
+          else {
+              jQuery("#reading-settings").slideUp(600);
+              jQuery("#toggle-cat-list").attr("title", "Cliquer pour dérouler la liste des catégories");
+              filter_list_container.removeClass('is-open'); 
+          }
+      })
+  })
+  </script>
+<script language="JavaScript">
+function setVisibility(id, visibility) {
+document.getElementById(id).style.display = visibility;
+}
+</script>
+</body>
+</html>
