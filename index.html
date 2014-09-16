@@ -42,7 +42,7 @@
   <ul id="nav" ng-controller="NavBarController">
     <li class="current"><a ng-click="showAll()" href="#" onclick="setVisibility('summaries', 'block');";><i class="icon-last-articles top-big"/></i><p>ARTICLES</p></a></li>
     <li><a ng-click="showAll()" href="poesis.html"><i class="icon-poesis-content top-big"/></i><p>POIESIS</p></a></li>
-    <li> <a class="star top-big" ng-click="showStarred()" onclick="setVisibility('summaries', 'block');";><i class="icon-favorite-full top-big"/></i><p class="favori">FAVORI</p></a></li>
+    <li> <a class="star top-big" ng-click="showStarred()" onclick="setVisibility('summaries', 'block');";><i class="icon-favorite-full top-big"/></i><p class="favori">FAVORIS</p></a></li>
     <li id="cat">
           <a href="#" id="toggle-cat-list" title="Cliquer pour dérouler les catégories"><i class="icon-settings top-big"/></i><p class="arrow-after">REGLAGES</p></a>
             <ul id="reading-settings">
@@ -54,7 +54,7 @@
               <li class="itemCount"><a ng-click="showUnread()"><i class="icon-read-empty small-settings"/></i><p>{{items.unreadCount()}} Non-lus</p></a></li>
               <li class="itemCount"><a ng-click="showRead()"><i class="icon-read-full small-settings"/></i><p>{{items.readCount()}} Lu</p></a></li>
               <!--  <button ng-click="items.markAllRead()" class="btn" title="Mark all as read" alt="Mark all as read"><i class="icon-ok"></i></button> -->
-              <li><i class="icon-reset small-settings"/></i><a ng-click="refresh()" title="Refresh all feeds" alt="Refresh all feeds"><i class="icon-refresh icon-white"></i></a></li>
+              <li><a ng-click="refresh()" title="Refresh all feeds" alt="Refresh all feeds"><i class="icon-reset small-settings"/></i></a></li>
               
               
           </ul>
@@ -146,12 +146,12 @@
       jQuery("#toggle-cat-list").on("click", function(e) {
           e.preventDefault();
           if (jQuery("#reading-settings").css( "display" ) == "none") {
-              jQuery("#reading-settings").slideDown(600);
+              jQuery("#reading-settings").fadeIn(150);
               jQuery("#toggle-cat-list").attr("title", "Cliquer pour fermer la liste des catégories");
               filter_list_container.toggleClass('is-open');
           }
           else {
-              jQuery("#reading-settings").slideUp(600);
+              jQuery("#reading-settings").fadeOut(150);
               jQuery("#toggle-cat-list").attr("title", "Cliquer pour dérouler la liste des catégories");
               filter_list_container.removeClass('is-open'); 
           }
