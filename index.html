@@ -5,6 +5,7 @@
 <script>
       document.write('<base href="' + document.location + '" />');
     </script>
+
   <!-- Use the .htaccess and remove these lines to avoid edge case issues.
        More info: h5bp.com/i/378 -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -64,21 +65,25 @@
 
 
   <section class="mainContent">
-    <section class="summaries" id="summaries">
-      <article ng-repeat="item in items.filtered | filter: search | orderBy: '-pub_date'" id="{{item.item_id}}" ng-class="{read: item.read, active: item.selected}" class="well summary" ng-click="items.selectItem($index)" onclick="setVisibility('summaries', 'none');";>
-        </div>
-        <div><img ng-show="items.featured_image.url" ng-src="{{items.featured_image.url}}"/></div>
-        <h3 class="pub-title">{{item.title}}</h3>
 
-            <div class="details" >
-          <div class="pub-name-summary">
-           {{item.category}}
+      <section class="summaries" id="summaries">
+          <a href="#post">
+        <article ng-repeat="item in items.filtered | filter: search | orderBy: '-pub_date'" id="{{item.item_id}}" ng-class="{read: item.read, active: item.selected}" class="well summary" ng-click="items.selectItem($index)" onclick="setVisibility('summaries', 'none');";>
           </div>
-          <div class="pub-date-summary">
-            {{item.pub_date | formattedDate}}
-          </div>
-          </div>
-      </article>
+          <div><img ng-show="items.featured_image.url" ng-src="{{items.featured_image.url}}" /></div>
+          <h3 class="pub-title">{{item.title}}</h3>
+
+              <div class="details" >
+            <div class="pub-name-summary">
+             {{item.category}}
+            </div>
+            <div class="pub-date-summary">
+              {{item.pub_date | formattedDate}}
+            </div>
+            </div>
+        </article>
+        </a>
+       <div class="parralax-test"></div>
     </section>
 
 
@@ -180,6 +185,18 @@ document.getElementById(id).style.display = visibility;
 }
 </script>
 
+
+
+<script>
+document.body.setAttribute("onhashchange", "update()");
+         function update() {
+            if('' === window.location.hash) {
+                 // window.location.reload();
+                 setVisibility('summaries', 'block');
+          }
+
+      };
+</script>
   <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
        mathiasbynens.be/notes/async-analytics-snippet -->
 
@@ -189,7 +206,6 @@ document.getElementById(id).style.display = visibility;
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g,s)}(document,'script'));
   </script>-->
-
 
 
 </body>

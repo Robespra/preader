@@ -1,0 +1,23 @@
+
+
+
+
+  <div class="bg-summaries" ></div>
+  <a href="#post">
+    <section class="summaries" id="summaries">
+           <article ng-repeat="item in items.filtered | filter: search | orderBy: '-pub_date'" id="{{item.item_id}}" ng-class="{read: item.read, active: item.selected}" class="well summary" ng-click="items.selectItem($index)" onclick="setVisibility('summaries', 'none');";>
+        </div>
+        <div><img ng-show="items.featured_image.url" ng-src="{{items.featured_image.url}}"/></div>
+        <h3 class="pub-title">{{item.title}}</h3>
+
+            <div class="details" >
+          <div class="pub-name-summary">
+           {{item.category}}
+          </div>
+          <div class="pub-date-summary">
+            {{item.pub_date | formattedDate}}
+          </div>
+          </div>
+      </article>
+</a>
+  </section>
