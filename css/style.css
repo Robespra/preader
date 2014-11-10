@@ -1268,6 +1268,9 @@ text-align:left;
 font-size: .7em;
 line-height: 1.7em;
 }
+.content-post::-webkit-scrollbar { 
+    display: none; 
+}
 
 .intro-excerp{
 border: 8px solid #fff;
