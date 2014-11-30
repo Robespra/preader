@@ -67,13 +67,10 @@
   <section class="mainContent">
 
       <section class="summaries" id="summaries">
+
           <a href="#post">
         <article ng-repeat="item in items.filtered | filter: search | orderBy: '-pub_date'" id="{{item.item_id}}" ng-class="{read: item.read, active: item.selected}" class="well summary" ng-click="items.selectItem($index)" onclick="setVisibility('summaries', 'none');";>
-          </div>
-          <div><img ng-show="items.featured_image.url" ng-src="{{items.featured_image.url}}" /></div>
-          <h3 class="pub-title">{{item.title}}</h3>
-
-              <div class="details" >
+            <div class="details" >
             <div class="pub-name-summary">
              {{item.category}}
             </div>
@@ -81,23 +78,29 @@
               {{item.pub_date | formattedDate}}
             </div>
             </div>
+          <div class="image_title" >
+            <div class="summary-featured-image-wrapper"><img class="summary-featured-image-full"ng-show="item.featured_image.url" ng-src="{{item.featured_image.url}}"  /></div>
+            
+            <h3 class="pub-title">{{item.title}}</h3>
+            </div>
+              
         </article>
         </a>
-       <div class="parralax-test"></div>
-    </section>
+           </section>
 
 
 
     <section class="entries content-post" id="post">
-      
+    <div class="content-post-featured-img-wrapper" ><img class="content-post-featured-img-full" ng-show="items.selected.featured_image.url" ng-src="{{items.selected.featured_image.url}}"  /></div>
          <div class="intro-excerp">
-          <h2 class="header">{{items.selected.title}}</h1>
+          <h2 class="header">{{items.selected.title}}</h2>
           <div class="short_desc" ng-bind-html-unsafe="item.short_desc"></div>
 
           <span class="author">{{items.selected.pub_author}}</span> - <span class="pub-name">{{items.selected.pub_name}}</span>
           </div>
        
        <article class="post">     
+        
        <div class="entry entry-meta" ng-class="{read: items.selected.read, active: items.selected.selected}" ng-hide="!items.selected">
           <span class="pub-date">
             {{items.selected.pub_date | formattedDate}} 
@@ -108,7 +111,7 @@
                <span class="actions">
              <input type="checkbox" class="star" ng-model="items.selected.starred"><p>marquer comme favori</p>
                       </span>
-          <div><img ng-show="items.selected.featured_image.url" ng-src="{{items.selected.featured_image.url}}"/></div>
+         
       </div>
 
        
