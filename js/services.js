@@ -30,9 +30,9 @@ function Item(entry, pub_name, feed_link) {
 	  this.content = entry.content;
 	  this.short_desc = entry.excerpt;
 	  this.category = entry.terms.category[0].name;
-	  this.featured_image = entry.featured_image.url;
+	  this.featured_image = entry.featured_image.attachment_meta.sizes.thumbnail.url;
 	  if (entry.featured_image != null) {
-	  	this.featured_image = entry.featured_image.attachment_meta.sizes['post-thumbnail'];
+	  	this.featured_image = entry.featured_image.attachment_meta.sizes.thumbnail.url;
 	  }
   }
 }
@@ -113,14 +113,13 @@ services.factory('items', ['$http', 'store', 'filterFilter', function($http, sto
 	    //var feedURL = 'http://blog.chromium.org/feeds/posts/default?alt=json';
 	    var feedURL = 'http://www.visu-synect.com/poesis/wp-json/posts?filter[post_status]=publish&filter[posts_per_page]=200&filter[orderby]=date&filter[order]=desc';
 	    // var feedURL = 'http://localhost:8000/preader/contenidojson.js';
-	    
 	    var successCallback = function(data, status, headers, config) {
 	      items.all = [];
 
 	      // Iterate through the items and create a new JSON object for each item
 	      data.forEach(function(entry, index, array) {
 	      
-	      	var item = new Item(entry, 'Angular Test', 'http://www.test.dev');
+	      	var item = new Item(entry, 'Poeisis', 'http://www.visu-synect.com/poesis');
 
 	        // Try to add the item to the data controller, if it's successfully
 	        //  added, we get TRUE and add the item to the local data store,
@@ -296,4 +295,3 @@ services.value('scroll', {
     }, 0);
 	}
 });
-

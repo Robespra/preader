@@ -79,7 +79,7 @@
             </div>
             </div>
           <div class="image_title" >
-            <div class="summary-featured-image-wrapper"><img class="summary-featured-image-full"ng-show="item.featured_image.url" ng-src="{{item.featured_image.url}}"  /></div>
+            <div class="summary-featured-image-wrapper"><img class="summary-featured-image-full"ng-show="item.featured_image" ng-src="{{item.featured_image}}"  /></div>
             
             <h3 class="pub-title">{{item.title}}</h3>
             </div>
@@ -91,7 +91,7 @@
 
 
     <section class="entries content-post" id="post">
-    <div class="content-post-featured-img-wrapper" ><img class="content-post-featured-img-full" ng-show="items.selected.featured_image.url" ng-src="{{items.selected.featured_image.url}}"  /></div>
+    <div class="content-post-featured-img-wrapper" ><img class="content-post-featured-img-full" ng-show="items.selected.featured_image" ng-src="{{items.selected.featured_image}}"  /></div>
          <div class="intro-excerp">
           <h2 class="header">{{items.selected.title}}</h2>
           <div class="short_desc" ng-bind-html-unsafe="item.short_desc"></div>
