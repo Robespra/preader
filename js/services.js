@@ -30,7 +30,7 @@ function Item(entry, pub_name, feed_link) {
 	  this.content = entry.content;
 	  this.short_desc = entry.excerpt;
 	  this.category = entry.terms.category[0].name;
-	  this.featured_image = entry.featured_image.attachment_meta.sizes.thumbnail.url;
+	  // this.featured_image = entry.featured_image.attachment_meta.sizes.thumbnail.url;
 	  if (entry.featured_image != null) {
 	  	this.featured_image = entry.featured_image.attachment_meta.sizes.thumbnail.url;
 	  }

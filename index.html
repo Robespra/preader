@@ -66,7 +66,7 @@
 
   <section class="mainContent">
 
-      <section class="summaries" id="summaries">
+      <section class="summaries" id="summaries" class="ngShow">
 
           <a href="#post">
         <article ng-repeat="item in items.filtered | filter: search | orderBy: '-pub_date'" id="{{item.item_id}}" ng-class="{read: item.read, active: item.selected}" class="well summary" ng-click="items.selectItem($index)" onclick="setVisibility('summaries', 'none');";>
@@ -83,7 +83,7 @@
             
             <h3 class="pub-title">{{item.title}}</h3>
             </div>
-              
+             <!--  <div class="short_desc" ng-bind-html-unsafe="item.short_desc"></div> -->
         </article>
         </a>
            </section>
@@ -131,7 +131,7 @@
   </footer>
 </script>
     <script src="js/libs/jquery-1.7.1.min.js"></script>
-  <!--<script src="js/plugins.js"></script>-->
+  <script src="js/plugins.js"></script>
   <script src="js/libs/lawnchair-0.6.1.min.js"></script>
   <script src="js/libs/lawnchair-adapter-indexed-db-0.6.1.js"></script>
   <script src="js/libs/lawnchair-adapter-webkit-sqlite-0.6.1.js"></script>

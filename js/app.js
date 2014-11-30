@@ -1,28 +1,6 @@
-'use strict';
-
 var wReader = angular.module('wReader', ['wReader.filters', 'wReader.services', 'wReader.directives', 'wReader.ngRoute', 'wReader.ngAnimate']);
 
-    // configure our routes
-    wReader.config(function($routeProvider, $locationProvider) {
-        $routeProvider
-
-            // route for the post page
-            .when('/post', {
-                templateUrl : 'pages/post.html',
-                controller  : 'postController'
-            });
-      $locationProvider.html5Mode(true);
-    });
-
-// CONTROLLERS ============================================
-// post page controller
-wReader.controller('postController', function($scope) {
-    $scope.pageClass = 'page-post';
-});
-
-
-
-
+  
 
 
 

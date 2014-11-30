@@ -1277,7 +1277,7 @@ article.post {
 .content-post {width:95%;left:0;
         right:0;
         top: 7%;
-        padding: 6em;
+        padding: 0;
         margin-left:auto;
         margin-right:auto;
 overflow-x: scroll;
@@ -1309,7 +1309,7 @@ height: auto;
 
 
 .intro-excerp{
-padding: 5em;
+
 font-size: 18px;
 line-height: 24px;
 font-style: normal;
